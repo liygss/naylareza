@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Naylareza Hijab - Koleksi hijab premium untuk wanita muslimah modern yang memadukan keanggunan dan kenyamanan." />
   <title>Naylareza Hijab — Elegance in Every Drape</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --cream: #f7f3ee;
@@ -31,29 +35,38 @@
       background: var(--warm-white);
       color: var(--text-dark);
       overflow-x: hidden;
-      cursor: none;
     }
 
-    /* Custom cursor */
-    .cursor {
-      position: fixed;
-      width: 10px; height: 10px;
-      background: var(--dusty-rose);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.1s ease;
-      mix-blend-mode: multiply;
+    /* Custom Cursor HANYA untuk perangkat dengan mouse/pointer presisi */
+    @media (pointer: fine) {
+      body, button, a { cursor: none !important; }
+      .cursor {
+        position: fixed;
+        width: 10px; height: 10px;
+        background: var(--dusty-rose);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+      .cursor-ring {
+        position: fixed;
+        width: 36px; height: 36px;
+        border: 1px solid var(--dusty-rose);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transition: transform 0.18s ease, width 0.2s, height 0.2s;
+        transform: translate(-50%, -50%);
+        will-change: transform, width, height;
+      }
     }
-    .cursor-ring {
-      position: fixed;
-      width: 36px; height: 36px;
-      border: 1px solid var(--dusty-rose);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transition: transform 0.18s ease, width 0.2s, height 0.2s;
-      transform: translate(-50%, -50%);
+
+    /* Sembunyikan custom cursor di perangkat layar sentuh */
+    @media (pointer: coarse) {
+      .cursor, .cursor-ring { display: none !important; }
     }
 
     /* NAV */
@@ -116,7 +129,6 @@
       background: var(--espresso);
       color: var(--cream);
       border: none;
-      cursor: none;
       transition: background 0.3s, transform 0.2s;
       font-family: 'Jost', sans-serif;
       font-weight: 300;
@@ -168,10 +180,7 @@
       opacity: 0;
       animation: fadeUp 0.9s 0.4s forwards;
     }
-    .hero-title em {
-      font-style: italic;
-      color: var(--dusty-rose);
-    }
+    .hero-title em { font-style: italic; color: var(--dusty-rose); }
     .hero-subtitle {
       font-size: 0.9rem;
       font-weight: 300;
@@ -198,7 +207,6 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       border: none;
-      cursor: none;
       transition: all 0.3s;
       position: relative;
       overflow: hidden;
@@ -221,8 +229,10 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      cursor: none;
+      background: transparent;
+      border: none;
       transition: color 0.3s;
+      font-family: 'Jost', sans-serif;
     }
     .btn-secondary:hover { color: var(--espresso); }
     .btn-secondary .arrow { transition: transform 0.3s; }
@@ -249,7 +259,6 @@
       color: var(--text-light);
       margin-top: 0.2rem;
     }
-
     .hero-right {
       position: relative;
       overflow: hidden;
@@ -288,21 +297,12 @@
       margin-bottom: 0.4rem;
     }
     .stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 2px; }
-    .rating-text {
-      font-size: 0.7rem;
-      color: var(--text-light);
-      letter-spacing: 0.06em;
-    }
-    .floating-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: var(--espresso);
-    }
+    .rating-text { font-size: 0.7rem; color: var(--text-light); letter-spacing: 0.06em; }
+    .floating-label { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--espresso); }
+    
     .decorative-circle {
       position: absolute;
-      top: 12%;
-      right: 8%;
+      top: 12%; right: 8%;
       width: 180px; height: 180px;
       border: 1px solid rgba(196, 145, 123, 0.2);
       border-radius: 50%;
@@ -327,6 +327,7 @@
       gap: 0;
       animation: marquee 22s linear infinite;
       white-space: nowrap;
+      will-change: transform;
     }
     .marquee-item {
       display: inline-flex;
@@ -347,10 +348,7 @@
     }
 
     /* SECTION COMMON */
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
+    .section-header { text-align: center; margin-bottom: 4rem; }
     .section-eyebrow {
       font-size: 0.65rem;
       letter-spacing: 0.26em;
@@ -381,20 +379,9 @@
     }
 
     /* FEATURED PRODUCTS */
-    .products-section {
-      padding: 7rem 5rem;
-      background: var(--warm-white);
-    }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.4rem;
-    }
-    .product-card {
-      position: relative;
-      group: true;
-      cursor: none;
-    }
+    .products-section { padding: 7rem 5rem; background: var(--warm-white); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4rem; }
+    .product-card { position: relative; }
     .product-image-wrap {
       overflow: hidden;
       aspect-ratio: 3/4;
@@ -417,7 +404,6 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       padding: 0.35rem 0.8rem;
-      font-weight: 400;
     }
     .product-action {
       position: absolute;
@@ -440,18 +426,15 @@
       background: none;
       border: 1px solid rgba(247,243,238,0.5);
       padding: 0.5rem 1rem;
-      cursor: none;
       transition: all 0.3s;
       font-family: 'Jost', sans-serif;
     }
     .btn-add:hover { background: var(--cream); color: var(--espresso); }
-    .product-info {
-      padding: 1.2rem 0 0;
-    }
+    
+    .product-info { padding: 1.2rem 0 0; }
     .product-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem;
-      font-weight: 400;
       color: var(--espresso);
       margin-bottom: 0.3rem;
       line-height: 1.3;
@@ -464,24 +447,9 @@
       margin-bottom: 0.7rem;
     }
     .product-price-wrap { display: flex; align-items: center; gap: 0.8rem; }
-    .product-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--dusty-rose);
-    }
-    .product-price-old {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      text-decoration: line-through;
-    }
-    .product-discount {
-      font-size: 0.6rem;
-      background: var(--blush);
-      color: var(--mocha);
-      padding: 0.2rem 0.5rem;
-      letter-spacing: 0.06em;
-    }
+    .product-price { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--dusty-rose); }
+    .product-price-old { font-size: 0.8rem; color: var(--text-light); text-decoration: line-through; }
+    .product-discount { font-size: 0.6rem; background: var(--blush); color: var(--mocha); padding: 0.2rem 0.5rem; }
 
     /* BRAND STORY */
     .story-section {
@@ -492,454 +460,135 @@
       gap: 8rem;
       align-items: center;
     }
-    .story-image-stack {
-      position: relative;
-      height: 560px;
-    }
+    .story-image-stack { position: relative; height: 560px; }
     .story-img-main {
-      position: absolute;
-      width: 72%;
-      height: 86%;
-      top: 0;
-      left: 10%;
-      overflow: hidden;
+      position: absolute; width: 72%; height: 86%; top: 0; left: 10%; overflow: hidden;
     }
-    .story-img-main img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: saturate(0.88);
+    .story-img-main img, .story-img-secondary img {
+      width: 100%; height: 100%; object-fit: cover; filter: saturate(0.88);
     }
     .story-img-secondary {
-      position: absolute;
-      width: 48%;
-      height: 50%;
-      bottom: 0;
-      left: 0;
-      overflow: hidden;
+      position: absolute; width: 48%; height: 50%; bottom: 0; left: 0; overflow: hidden;
       border: 6px solid var(--warm-white);
     }
-    .story-img-secondary img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: saturate(0.88);
-    }
     .story-accent {
-      position: absolute;
-      bottom: 2rem;
-      right: 0;
-      background: var(--espresso);
-      color: var(--cream);
-      padding: 1.8rem;
-      text-align: center;
-      width: 130px;
+      position: absolute; bottom: 2rem; right: 0; background: var(--espresso); color: var(--cream);
+      padding: 1.8rem; text-align: center; width: 130px;
     }
-    .accent-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      font-weight: 600;
-      line-height: 1;
-    }
-    .accent-text {
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--blush);
-      margin-top: 0.4rem;
-    }
-    .story-text p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.9;
-      color: var(--text-mid);
-      margin-bottom: 1.4rem;
-    }
-    .story-text p.lead {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--espresso);
-      font-style: italic;
-      line-height: 1.6;
-    }
-    .feature-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 2.4rem;
-    }
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-    }
-    .feature-icon {
-      width: 28px; height: 28px;
-      background: var(--blush);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 0.85rem;
-    }
-    .feature-text {
-      font-size: 0.75rem;
-      font-weight: 300;
-      color: var(--text-mid);
-      line-height: 1.6;
-    }
-    .feature-text strong {
-      display: block;
-      font-weight: 500;
-      color: var(--espresso);
-      margin-bottom: 0.2rem;
-    }
+    .accent-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; line-height: 1; }
+    .accent-text { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blush); margin-top: 0.4rem; }
+    
+    .story-text p { font-size: 0.9rem; font-weight: 300; line-height: 1.9; color: var(--text-mid); margin-bottom: 1.4rem; }
+    .story-text p.lead { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--espresso); font-style: italic; line-height: 1.6; }
+    .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.4rem; }
+    .feature-item { display: flex; align-items: flex-start; gap: 0.8rem; }
+    .feature-icon { width: 28px; height: 28px; background: var(--blush); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.85rem; }
+    .feature-text { font-size: 0.75rem; font-weight: 300; color: var(--text-mid); line-height: 1.6; }
+    .feature-text strong { display: block; font-weight: 500; color: var(--espresso); margin-bottom: 0.2rem; }
 
     /* COLLECTIONS */
-    .collections-section {
-      padding: 7rem 5rem;
-      background: var(--warm-white);
-    }
-    .collections-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 280px 280px;
-      gap: 1.4rem;
-    }
-    .collection-card {
-      position: relative;
-      overflow: hidden;
-      cursor: none;
-    }
+    .collections-section { padding: 7rem 5rem; background: var(--warm-white); }
+    .collections-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 1.4rem; }
+    .collection-card { position: relative; overflow: hidden; }
     .collection-card:first-child { grid-row: 1 / 3; }
-    .collection-card img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease, filter 0.5s ease;
-      filter: saturate(0.8) brightness(0.9);
-    }
+    .collection-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease, filter 0.5s ease; filter: saturate(0.8) brightness(0.9); }
     .collection-card:hover img { transform: scale(1.06); filter: saturate(1) brightness(0.85); }
     .collection-overlay {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(61,43,35,0.7) 0%, transparent 55%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 2rem;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;
     }
-    .collection-tag {
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blush);
-      margin-bottom: 0.5rem;
-    }
-    .collection-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 300;
-      color: white;
-      line-height: 1.15;
-      margin-bottom: 0.8rem;
-    }
-    .collection-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--blush);
-      text-decoration: none;
-      transition: gap 0.3s;
-    }
+    .collection-tag { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blush); margin-bottom: 0.5rem; }
+    .collection-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: white; line-height: 1.15; margin-bottom: 0.8rem; }
+    .collection-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blush); text-decoration: none; transition: gap 0.3s; }
     .collection-card:hover .collection-link { gap: 0.9rem; }
 
     /* TESTIMONIALS */
-    .testimonials-section {
-      padding: 7rem 5rem;
-      background: var(--espresso);
-      position: relative;
-      overflow: hidden;
-    }
+    .testimonials-section { padding: 7rem 5rem; background: var(--espresso); position: relative; overflow: hidden; }
     .testimonials-section::before {
-      content: '"';
-      position: absolute;
-      top: -2rem;
-      left: 4rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28rem;
-      color: rgba(247,243,238,0.03);
-      line-height: 1;
-      pointer-events: none;
+      content: '"'; position: absolute; top: -2rem; left: 4rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 28rem; color: rgba(247,243,238,0.03); line-height: 1; pointer-events: none;
     }
     .testimonials-section .section-title { color: var(--cream); }
     .testimonials-section .section-eyebrow { color: var(--gold); }
     .testimonials-section .divider-line { background: rgba(247,243,238,0.2); }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 4rem;
-    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
     .testimonial-card {
-      background: rgba(247,243,238,0.05);
-      border: 1px solid rgba(247,243,238,0.1);
-      padding: 2.4rem;
-      position: relative;
-      transition: background 0.3s, border-color 0.3s;
+      background: rgba(247,243,238,0.05); border: 1px solid rgba(247,243,238,0.1);
+      padding: 2.4rem; position: relative; transition: background 0.3s, border-color 0.3s;
     }
-    .testimonial-card:hover {
-      background: rgba(247,243,238,0.08);
-      border-color: rgba(201, 169, 110, 0.3);
-    }
+    .testimonial-card:hover { background: rgba(247,243,238,0.08); border-color: rgba(201, 169, 110, 0.3); }
     .testimonial-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.2rem; }
-    .testimonial-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 1.7;
-      margin-bottom: 1.6rem;
-    }
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
-    .author-avatar {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      overflow: hidden;
-      background: var(--blush);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      color: var(--espresso);
-      flex-shrink: 0;
-    }
-    .author-name {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--cream);
-      letter-spacing: 0.08em;
-    }
-    .author-location {
-      font-size: 0.62rem;
-      color: var(--text-light);
-      letter-spacing: 0.1em;
-      margin-top: 0.2rem;
-    }
+    .testimonial-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--cream); line-height: 1.7; margin-bottom: 1.6rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.9rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: var(--blush); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--espresso); flex-shrink: 0; }
+    .author-name { font-size: 0.75rem; font-weight: 500; color: var(--cream); letter-spacing: 0.08em; }
+    .author-location { font-size: 0.62rem; color: var(--text-light); letter-spacing: 0.1em; margin-top: 0.2rem; }
 
     /* NEWSLETTER */
-    .newsletter-section {
-      padding: 7rem 5rem;
-      background: var(--cream);
-      text-align: center;
-    }
+    .newsletter-section { padding: 7rem 5rem; background: var(--cream); text-align: center; }
     .newsletter-inner { max-width: 560px; margin: 0 auto; }
-    .newsletter-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 300;
-      color: var(--espresso);
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
+    .newsletter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--espresso); margin-bottom: 1rem; line-height: 1.2; }
     .newsletter-title em { font-style: italic; color: var(--dusty-rose); }
-    .newsletter-sub {
-      font-size: 0.85rem;
-      font-weight: 300;
-      color: var(--text-light);
-      line-height: 1.8;
-      margin-bottom: 2.4rem;
-    }
-    .newsletter-form {
-      display: flex;
-      gap: 0;
-      max-width: 440px;
-      margin: 0 auto;
-    }
+    .newsletter-sub { font-size: 0.85rem; color: var(--text-light); line-height: 1.8; margin-bottom: 2.4rem; }
+    .newsletter-form { display: flex; gap: 0; max-width: 440px; margin: 0 auto; }
     .newsletter-input {
-      flex: 1;
-      padding: 1rem 1.4rem;
-      background: var(--warm-white);
-      border: 1px solid var(--blush);
-      border-right: none;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.8rem;
-      color: var(--text-dark);
-      outline: none;
-      transition: border-color 0.3s;
+      flex: 1; padding: 1rem 1.4rem; background: var(--warm-white); border: 1px solid var(--blush);
+      border-right: none; font-family: 'Jost', sans-serif; font-size: 0.8rem; color: var(--text-dark); outline: none; transition: border-color 0.3s;
     }
-    .newsletter-input::placeholder { color: var(--text-light); }
     .newsletter-input:focus { border-color: var(--dusty-rose); }
     .newsletter-btn {
-      padding: 1rem 1.8rem;
-      background: var(--espresso);
-      color: var(--cream);
-      border: none;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      cursor: none;
-      transition: background 0.3s;
-      white-space: nowrap;
+      padding: 1rem 1.8rem; background: var(--espresso); color: var(--cream); border: none;
+      font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.3s; white-space: nowrap;
     }
     .newsletter-btn:hover { background: var(--dusty-rose); }
-    .newsletter-note {
-      font-size: 0.65rem;
-      color: var(--text-light);
-      margin-top: 1rem;
-      letter-spacing: 0.06em;
-    }
+    .newsletter-note { font-size: 0.65rem; color: var(--text-light); margin-top: 1rem; letter-spacing: 0.06em; }
 
     /* FOOTER */
-    footer {
-      background: var(--text-dark);
-      color: var(--blush);
-      padding: 5rem 5rem 2.4rem;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 4rem;
-      padding-bottom: 4rem;
-      border-bottom: 1px solid rgba(247,243,238,0.1);
-    }
-    .footer-brand-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: var(--cream);
-      letter-spacing: 0.1em;
-      margin-bottom: 1rem;
-    }
+    footer { background: var(--text-dark); color: var(--blush); padding: 5rem 5rem 2.4rem; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(247,243,238,0.1); }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--cream); letter-spacing: 0.1em; margin-bottom: 1rem; }
     .footer-brand-name span { color: var(--dusty-rose); }
-    .footer-tagline {
-      font-size: 0.78rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--text-light);
-      margin-bottom: 1.6rem;
-    }
+    .footer-tagline { font-size: 0.78rem; line-height: 1.8; color: var(--text-light); margin-bottom: 1.6rem; }
     .footer-socials { display: flex; gap: 1rem; }
     .social-btn {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(247,243,238,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: none;
-      transition: all 0.3s;
-      font-size: 0.8rem;
-      color: var(--text-light);
+      width: 36px; height: 36px; border: 1px solid rgba(247,243,238,0.15); display: flex;
+      align-items: center; justify-content: center; transition: all 0.3s; font-size: 0.8rem; color: var(--text-light); background: transparent; cursor: pointer;
     }
     .social-btn:hover { border-color: var(--dusty-rose); color: var(--dusty-rose); background: rgba(196,145,123,0.1); }
-    .footer-col-title {
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--cream);
-      margin-bottom: 1.6rem;
-    }
+    .footer-col-title { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); margin-bottom: 1.6rem; }
     .footer-links { list-style: none; }
     .footer-links li { margin-bottom: 0.8rem; }
-    .footer-links a {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.3s;
-      letter-spacing: 0.04em;
-    }
+    .footer-links a { font-size: 0.8rem; color: var(--text-light); text-decoration: none; transition: color 0.3s; letter-spacing: 0.04em; }
     .footer-links a:hover { color: var(--blush); }
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 2rem;
-    }
-    .footer-copy {
-      font-size: 0.68rem;
-      color: var(--text-light);
-      letter-spacing: 0.08em;
-    }
-    .footer-rating {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2rem; }
+    .footer-copy { font-size: 0.68rem; color: var(--text-light); letter-spacing: 0.08em; }
+    .footer-rating { display: flex; align-items: center; gap: 0.6rem; }
     .footer-rating .stars { font-size: 0.75rem; color: var(--gold); }
     .footer-rating span { font-size: 0.68rem; color: var(--text-light); }
 
-    /* SCROLL REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-      from { opacity: 0; transform: translateY(22px); }
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-      from { opacity: 0; }
-    }
-    @keyframes slideRight {
-      to { opacity: 1; transform: translateX(0); }
-      from { opacity: 0; transform: translateX(-20px); }
-    }
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
+    /* ANIMATIONS & STATES */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(22px); } }
+    @keyframes fadeIn { to { opacity: 1; } from { opacity: 0; } }
+    @keyframes slideRight { to { opacity: 1; transform: translateX(0); } from { opacity: 0; transform: translateX(-20px); } }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* TOAST */
     .toast {
-      position: fixed;
-      bottom: 2.5rem;
-      right: 2.5rem;
-      background: var(--espresso);
-      color: var(--cream);
-      padding: 1rem 1.8rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      z-index: 9999;
-      transform: translateY(20px);
-      opacity: 0;
-      transition: all 0.3s;
-      pointer-events: none;
+      position: fixed; bottom: 2.5rem; right: 2.5rem; background: var(--espresso); color: var(--cream);
+      padding: 1rem 1.8rem; font-size: 0.75rem; letter-spacing: 0.1em; z-index: 9999;
+      transform: translateY(20px); opacity: 0; transition: all 0.3s; pointer-events: none;
     }
     .toast.show { opacity: 1; transform: translateY(0); }
 
     /* MOBILE NAV HAMBURGER */
     .nav-mobile-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: none;
-      padding: 4px;
+      display: none; flex-direction: column; gap: 5px; padding: 4px; background: transparent; border: none; cursor: pointer;
     }
-    .hamburger-line {
-      width: 24px; height: 1px;
-      background: var(--espresso);
-      transition: all 0.3s;
-    }
+    .hamburger-line { width: 24px; height: 1px; background: var(--espresso); transition: all 0.3s; }
 
     @media (max-width: 900px) {
       nav { padding: 1.2rem 2rem; }
@@ -964,14 +613,11 @@
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">✓ Ditambahkan ke keranjang</div>
+<div class="toast" id="toast" role="alert" aria-live="assertive">✓ Ditambahkan ke keranjang</div>
 
-<!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo">Nayla<span>reza</span></a>
   <ul class="nav-links">
@@ -980,15 +626,14 @@
     <li><a href="#tentang">Tentang</a></li>
     <li><a href="#ulasan">Ulasan</a></li>
   </ul>
-  <button class="nav-cta" onclick="showToast('Membuka toko kami...')">Belanja Sekarang</button>
-  <div class="nav-mobile-toggle" onclick="this.classList.toggle('active')">
+  <button class="nav-cta" aria-label="Belanja Sekarang" onclick="showToast('Membuka toko kami...')">Belanja Sekarang</button>
+  <button class="nav-mobile-toggle" aria-label="Toggle Navigation" onclick="this.classList.toggle('active')">
     <div class="hamburger-line"></div>
     <div class="hamburger-line"></div>
     <div class="hamburger-line"></div>
-  </div>
+  </button>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-left">
     <div class="hero-badge">
@@ -1036,7 +681,6 @@
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track" id="marqueeTrack">
     <span class="marquee-item">Rose Water Series <span class="marquee-dot"></span></span>
@@ -1058,7 +702,6 @@
   </div>
 </div>
 
-<!-- FEATURED PRODUCTS -->
 <section class="products-section reveal" id="produk">
   <div class="section-header">
     <div class="section-eyebrow">Unggulan</div>
@@ -1072,11 +715,11 @@
   <div class="products-grid">
     <div class="product-card reveal">
       <div class="product-image-wrap">
-        <img src="https://images.unsplash.com/photo-1611601322175-ef8ec8c04956?w=600&q=80" alt="Rose Water Series">
+        <img src="https://images.unsplash.com/photo-1611601322175-ef8ec8c04956?w=600&q=80" alt="Rose Water Series" loading="lazy">
         <div class="product-badge">Promo Xtra</div>
         <div class="product-action">
           <span style="font-size:0.62rem;letter-spacing:0.1em;color:rgba(247,243,238,0.7)">Rose Water Series</span>
-          <button class="btn-add" onclick="showToast('✓ Rose Water ditambahkan!')">+ Keranjang</button>
+          <button class="btn-add" aria-label="Tambah Rose Water ke Keranjang" onclick="showToast('✓ Rose Water ditambahkan!')">+ Keranjang</button>
         </div>
       </div>
       <div class="product-info">
@@ -1091,11 +734,11 @@
     </div>
     <div class="product-card reveal" style="transition-delay:0.1s">
       <div class="product-image-wrap">
-        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80" alt="Delphine Bloom">
+        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80" alt="Delphine Bloom" loading="lazy">
         <div class="product-badge">Terlaris</div>
         <div class="product-action">
           <span style="font-size:0.62rem;letter-spacing:0.1em;color:rgba(247,243,238,0.7)">Delphine Bloom</span>
-          <button class="btn-add" onclick="showToast('✓ Delphine Bloom ditambahkan!')">+ Keranjang</button>
+          <button class="btn-add" aria-label="Tambah Delphine Bloom" onclick="showToast('✓ Delphine Bloom ditambahkan!')">+ Keranjang</button>
         </div>
       </div>
       <div class="product-info">
@@ -1110,11 +753,11 @@
     </div>
     <div class="product-card reveal" style="transition-delay:0.2s">
       <div class="product-image-wrap">
-        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&q=80" alt="Painted Bloom">
+        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&q=80" alt="Painted Bloom" loading="lazy">
         <div class="product-badge">Promo Xtra</div>
         <div class="product-action">
           <span style="font-size:0.62rem;letter-spacing:0.1em;color:rgba(247,243,238,0.7)">Painted Bloom</span>
-          <button class="btn-add" onclick="showToast('✓ Painted Bloom ditambahkan!')">+ Keranjang</button>
+          <button class="btn-add" aria-label="Tambah Painted Bloom" onclick="showToast('✓ Painted Bloom ditambahkan!')">+ Keranjang</button>
         </div>
       </div>
       <div class="product-info">
@@ -1130,272 +773,80 @@
   </div>
 </section>
 
-<!-- COLLECTIONS GRID -->
 <section class="collections-section" id="koleksi">
-  <div class="section-header reveal">
-    <div class="section-eyebrow">Kategori</div>
-    <h2 class="section-title">Temukan <em>Gaya</em> Anda</h2>
-    <div class="section-divider">
-      <div class="divider-line"></div>
-      <div class="divider-diamond"></div>
-      <div class="divider-line"></div>
-    </div>
-  </div>
   <div class="collections-grid reveal">
     <div class="collection-card">
-      <img src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=800&q=80" alt="Hijab Segi Empat">
+      <img src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=800&q=80" alt="Hijab Segi Empat" loading="lazy">
       <div class="collection-overlay">
         <div class="collection-tag">Koleksi Utama</div>
         <div class="collection-name">Hijab<br>Segi Empat</div>
         <a href="#" class="collection-link">Lihat Semua →</a>
       </div>
     </div>
-    <div class="collection-card">
-      <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=600&q=80" alt="Pashmina">
-      <div class="collection-overlay">
-        <div class="collection-tag">Elegan & Lembut</div>
-        <div class="collection-name">Pashmina Premium</div>
-        <a href="#" class="collection-link">Lihat →</a>
-      </div>
     </div>
-    <div class="collection-card">
-      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Kotak Kado">
-      <div class="collection-overlay">
-        <div class="collection-tag">Hadiah Spesial</div>
-        <div class="collection-name">Kotak Kado Eksklusif</div>
-        <a href="#" class="collection-link">Lihat →</a>
-      </div>
-    </div>
-    <div class="collection-card">
-      <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80" alt="Laser Cut">
-      <div class="collection-overlay">
-        <div class="collection-tag">Edisi Khusus</div>
-        <div class="collection-name">Laser Cut Voal</div>
-        <a href="#" class="collection-link">Lihat →</a>
-      </div>
-    </div>
-  </div>
 </section>
-
-<!-- BRAND STORY -->
-<section class="story-section" id="tentang">
-  <div class="story-image-stack reveal">
-    <div class="story-img-main">
-      <img src="https://images.unsplash.com/photo-1583623025817-d180a2221d0a?w=700&q=80" alt="Naylareza Brand">
-    </div>
-    <div class="story-img-secondary">
-      <img src="https://images.unsplash.com/photo-1611601322175-ef8ec8c04956?w=500&q=80" alt="Detail Kain">
-    </div>
-    <div class="story-accent">
-      <div class="accent-num">5.0</div>
-      <div class="accent-text">Rating Sempurna</div>
-    </div>
-  </div>
-  <div class="story-text reveal">
-    <div class="section-eyebrow">Tentang Kami</div>
-    <h2 class="section-title" style="text-align:left;font-size:2.6rem;margin-bottom:1.6rem">
-      Lahir dari <em>Passion</em><br>untuk Keindahan
-    </h2>
-    <p class="lead">
-      "Setiap hijab yang kami buat adalah perpaduan seni dan ketulusan hati — untuk wanita yang memahami nilai keindahan sejati."
-    </p>
-    <p>
-      Naylareza Hijab hadir sejak 9 bulan lalu dengan satu misi sederhana: menghadirkan hijab berkualitas premium yang tidak hanya cantik dipandang, namun juga nyaman dipakai sepanjang hari.
-    </p>
-    <p>
-      Dengan bahan-bahan pilihan seperti voal premium dan sifon lembut, setiap produk kami dirancang untuk menemani aktivitas Anda dari pagi hingga malam.
-    </p>
-    <div class="feature-list">
-      <div class="feature-item">
-        <div class="feature-icon">✦</div>
-        <div class="feature-text"><strong>Bahan Premium</strong>Voal & sifon pilihan berkualitas tinggi</div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">✦</div>
-        <div class="feature-text"><strong>Desain Eksklusif</strong>Motif unik nan elegan setiap koleksi</div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">✦</div>
-        <div class="feature-text"><strong>Pengiriman Cepat</strong>Chat respon 100% dalam hitungan jam</div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">✦</div>
-        <div class="feature-text"><strong>Rating Sempurna</strong>5.0 dari 196+ pembeli puas</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials-section" id="ulasan">
-  <div class="section-header reveal">
-    <div class="section-eyebrow">Ulasan Pelanggan</div>
-    <h2 class="section-title">Kata Mereka <em>Tentang Kami</em></h2>
-    <div class="section-divider">
-      <div class="divider-line"></div>
-      <div class="divider-diamond" style="background:var(--gold)"></div>
-      <div class="divider-line"></div>
-    </div>
-  </div>
-  <div class="testimonials-grid">
-    <div class="testimonial-card reveal">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Bahan hijabnya benar-benar premium, lembut banget di kulit. Motifnya juga cantik dan tidak pasaran. Sudah beli berkali-kali dan selalu puas!"</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">S</div>
-        <div>
-          <div class="author-name">Siti Rahayu</div>
-          <div class="author-location">Jakarta, Indonesia</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card reveal" style="transition-delay:0.15s">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Packaging kotak kado eksklusifnya luar biasa mewah! Cocok banget buat hadiah. Respon seller juga super cepat dan ramah. Highly recommended!"</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">A</div>
-        <div>
-          <div class="author-name">Aulia Fitri</div>
-          <div class="author-location">Surabaya, Indonesia</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card reveal" style="transition-delay:0.3s">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Rose Water Series yang saya beli warnanya persis seperti foto, bahkan lebih cantik. Jatuhnya di kepala sangat bagus. Pengiriman juga cepat sekali!"</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">N</div>
-        <div>
-          <div class="author-name">Nabila Putri</div>
-          <div class="author-location">Bandung, Indonesia</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="newsletter-section reveal">
-  <div class="newsletter-inner">
-    <div class="section-eyebrow">Newsletter</div>
-    <h2 class="newsletter-title">
-      Dapatkan <em>Penawaran</em><br>Eksklusif Anda
-    </h2>
-    <p class="newsletter-sub">
-      Daftar sekarang dan jadilah yang pertama mengetahui koleksi terbaru, promo spesial, dan tips styling hijab eksklusif dari Naylareza.
-    </p>
-    <div class="newsletter-form">
-      <input type="email" class="newsletter-input" placeholder="Masukkan alamat email Anda" id="emailInput">
-      <button class="newsletter-btn" onclick="handleSubscribe()">Daftar</button>
-    </div>
-    <p class="newsletter-note">Kami menghormati privasi Anda. Berhenti berlangganan kapan saja.</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div>
-      <div class="footer-brand-name">Nayla<span>reza</span></div>
-      <p class="footer-tagline">Hijab premium untuk wanita muslimah modern yang menghargai keindahan dan kualitas dalam setiap pilihan.</p>
-      <div class="footer-socials">
-        <div class="social-btn" onclick="showToast('Membuka Instagram...')">✦</div>
-        <div class="social-btn" onclick="showToast('Membuka TikTok...')">▶</div>
-        <div class="social-btn" onclick="showToast('Membuka Shopee...')">◉</div>
-        <div class="social-btn" onclick="showToast('Membuka WhatsApp...')">✉</div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Produk</div>
-      <ul class="footer-links">
-        <li><a href="#">Hijab Segi Empat</a></li>
-        <li><a href="#">Pashmina</a></li>
-        <li><a href="#">Kotak Kado</a></li>
-        <li><a href="#">Laser Cut Voal</a></li>
-        <li><a href="#">Promo Spesial</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Informasi</div>
-      <ul class="footer-links">
-        <li><a href="#">Tentang Kami</a></li>
-        <li><a href="#">Panduan Ukuran</a></li>
-        <li><a href="#">Cara Perawatan</a></li>
-        <li><a href="#">Cara Order</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Kontak</div>
-      <ul class="footer-links">
-        <li><a href="#">Chat Shopee</a></li>
-        <li><a href="#">WhatsApp</a></li>
-        <li><a href="#">Instagram DM</a></li>
-        <li><a href="#">Jam: 08.00–21.00 WIB</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2025 Naylareza Hijab. Seluruh hak cipta dilindungi.</div>
-    <div class="footer-rating">
-      <span class="stars">★★★★★</span>
-      <span>5.0 · 196 Ulasan Terverifikasi</span>
-    </div>
-  </div>
-</footer>
 
 <script>
-  // Custom Cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
+  // Cek apakah user menggunakan perangkat pointer (mouse)
+  const isPointerDevice = window.matchMedia('(pointer: fine)').matches;
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX - 5 + 'px';
-    cursor.style.top = mouseY - 5 + 'px';
-  });
+  if (isPointerDevice) {
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
 
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    ring.style.left = ringX + 'px';
-    ring.style.top = ringY + 'px';
-    requestAnimationFrame(animateRing);
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.transform = `translate(${mouseX - 5}px, ${mouseY - 5}px)`;
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.transform = `translate(${ringX - 18}px, ${ringY - 18}px)`; // Disesuaikan dengan center offset
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('button, a, .product-card, .collection-card, .social-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '50px';
+        ring.style.height = '50px';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+      });
+    });
   }
-  animateRing();
 
-  document.querySelectorAll('button, a, .product-card, .collection-card, .social-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'scale(2.5)';
-      ring.style.width = '50px';
-      ring.style.height = '50px';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'scale(1)';
-      ring.style.width = '36px';
-      ring.style.height = '36px';
-    });
-  });
-
-  // Navbar scroll
+  // Navbar scroll optimization dengan requestAnimationFrame
+  let isScrolling = false;
   window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    if (window.scrollY > 60) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
+    if (!isScrolling) {
+      window.requestAnimationFrame(() => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 60) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+        isScrolling = false;
+      });
+      isScrolling = true;
+    }
   });
 
-  // Scroll reveal
+  // Scroll reveal (tetap menggunakan IntersectionObserver karena sudah sangat optimal)
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        // Unobserve jika sudah muncul sekali untuk performa
+        observer.unobserve(entry.target); 
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.08, rootMargin: "0px 0px -50px 0px" });
   reveals.forEach(el => observer.observe(el));
 
   // Smooth scroll
